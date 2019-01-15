@@ -41,7 +41,7 @@ public final class Game extends Canvas implements Runnable
     {
         //this.addKeyListener(new KeyInput());
 
-        this.window = new Window(WIDTH, HEIGHT, this);
+        //this.window = new Window(WIDTH, HEIGHT, this);
 
         handler = new Handler(this, dna);
         this.start();
@@ -73,7 +73,7 @@ public final class Game extends Canvas implements Runnable
     public void stop()
     {
         running = false;
-        window.frame.dispose();
+        //window.frame.dispose();
     }
 
     @Override
@@ -87,7 +87,7 @@ public final class Game extends Canvas implements Runnable
             double frameTime = newTime - currentTime;
             currentTime = newTime;
             tick(frameTime);
-            render();
+            //render();
         }
     }
 
@@ -135,8 +135,8 @@ class DNA
     double decrease_rate;
     double virtual_spawn_count;
     double virtual_spawn_speed;
-    double player_speed;
-    double fitness;// 1 ~ 30
+    double player_speed;//1~30
+    double fitness;
 
     DNA()
     {
