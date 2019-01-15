@@ -29,7 +29,7 @@ public class Spownser extends GameObject
     {
         if (player.isDie()) return;
         long nowTime = System.currentTimeMillis();
-        if (nowTime - lastLevelUpTime >= 1_00)
+        if (nowTime - lastLevelUpTime >= 5_000)
         {
             ++level;
             player.level = level;
@@ -43,14 +43,14 @@ public class Spownser extends GameObject
             lastSpownTime = nowTime;
         }
         score = (nowTime - startTime) / 1000;
-        if (Game.genetics[6] * (nowTime - lastFakeSpawnTime) > 1000)
+        if (handler.dna.virtual_spawn_count * (nowTime - lastFakeSpawnTime) > 1000)
         {
             lastFakeSpawnTime = nowTime;
             Obstacle ob =null;
             if (cnt %2 == 0)
-                ob = new Obstacle(-30 - obstacleImage.getWidth(), -200, obstacleImage, ID.Obstacle, handler, Game.genetics[7], player, -1);
+                ob = new Obstacle(-30 - obstacleImage.getWidth(), -200, obstacleImage, ID.Obstacle, handler, handler.dna.virtual_spawn_speed, player, -1);
             else
-                ob = new Obstacle(Game.WIDTH + 30, -200, obstacleImage, ID.Obstacle, handler, Game.genetics[7], player, -1);
+                ob = new Obstacle(Game.WIDTH + 30, -200, obstacleImage, ID.Obstacle, handler, handler.dna.virtual_spawn_speed, player, -1);
             ++cnt;
             handler.addObject(ob);
         }

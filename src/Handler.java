@@ -8,13 +8,15 @@ public class Handler
     private TreeSet<GameObject> objects = new TreeSet<>();
     private Queue<GameObject> addList = new LinkedList<>();
     private Queue<GameObject> removeList = new LinkedList<>();
+    public DNA dna;
     private Game game;
     public Game getGame()
     {
         return game;
     }
-    public Handler(Game game)
+    public Handler(Game game, DNA dna)
     {
+        this.dna = dna;
         this.game =game;
         int w = Game.WIDTH/10;
         int h = Game.HEIGHT;

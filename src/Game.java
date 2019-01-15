@@ -13,21 +13,37 @@ public final class Game extends Canvas implements Runnable
     private Window window;
 
 
-    public static double[] genetics;
-
-    public static long testGame(double[] G)
+    public static void testGame(DNA[] dna)
     {
-        genetics = G;
-        return new Game().lastScore;
+        Thread[] threads = new Thread[dna.length];
+        for (int i = 0; i < dna.length; ++i)
+        {
+            DNA testDNA = dna[i];
+            threads[i] = new Thread(() ->
+            {
+                testDNA.fitness = new Game(testDNA).lastScore;
+            });
+            threads[i].start();
+        }
+        for (Thread thread : threads)
+        {
+            try
+            {
+                thread.join();
+            } catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+        }
     }
 
-    private Game()
+    private Game(DNA dna)
     {
-        this.addKeyListener(new KeyInput());
+        //this.addKeyListener(new KeyInput());
 
         this.window = new Window(WIDTH, HEIGHT, this);
 
-        handler = new Handler(this);
+        handler = new Handler(this, dna);
         this.start();
 
     }
@@ -102,9 +118,10 @@ public final class Game extends Canvas implements Runnable
 
     public static void main(String[] args)
     {
-
-        for (int i = 0; i < 10; ++i)
-            System.out.println(testGame());
+        DNA[] d = new DNA[100];
+        for(int i = 0; i< 100;++i) d[i]= new DNA();
+        testGame(d);
+        for (int i=0;i<100;++i) System.out.println(d[i].fitness);
     }
 }
 
@@ -118,8 +135,8 @@ class DNA
     double decrease_rate;
     double virtual_spawn_count;
     double virtual_spawn_speed;
-
-    double fitness;
+    double player_speed;
+    double fitness;// 1 ~ 30
 
     DNA()
     {
@@ -132,17 +149,18 @@ class DNA
         decrease_rate = random.nextDouble();
         virtual_spawn_count = random.nextDouble() * 20;
         virtual_spawn_speed = random.nextDouble() * (30 - 1) + 1;
+        player_speed = random.nextDouble() * 29 + 1;
     }
 
     void fitness()
     {
-        fitness = Game.testGame(new double[]{diagonal_dist, velocity, y_coord, resemblance, node_erase, decrease_rate, virtual_spawn_count, virtual_spawn_speed});
+        //fitness = Game.testGame(new double[]{diagonal_dist, velocity, y_coord, resemblance, node_erase, decrease_rate, virtual_spawn_count, virtual_spawn_speed});
     }
 
     DNA crossover(DNA partner)
     {
         DNA child = new DNA();
-        
+
 
         return child;
     }

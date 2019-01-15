@@ -14,7 +14,7 @@ public class GE extends GameObject
 
     private double getDangerVal(Point2D.Double player, Obstacle obstacle)
     {
-        return -Math.pow(player.distance(obstacle.getMidPoint()), Game.genetics[0]) + Math.pow(obstacle.velY, Game.genetics[1]) + Math.pow(Math.max(obstacle.y, 1), Game.genetics[2]);
+        return -Math.pow(player.distance(obstacle.getMidPoint()), handler.dna.diagonal_dist) + Math.pow(obstacle.velY, handler.dna.velocity) + Math.pow(Math.max(obstacle.y, 1), handler.dna.y_coord);
     }
 
     class Data
@@ -109,7 +109,7 @@ public class GE extends GameObject
                 if (dangers.get(cand).d < dangers.get(now).d && dangers.get(cand).obstacle.line != 0 && dangers.get(cand).obstacle.line != 9)
                 {
                     //System.out.println(Math.abs(dangers.get(cand).d - dangers.get(now).d));
-                    if (Math.abs(dangers.get(cand).d - dangers.get(now).d) < Game.genetics[3])
+                    if (Math.abs(dangers.get(cand).d - dangers.get(now).d) < handler.dna.resemblance)
                     {
                         moreImportant = true;
                         if (Math.abs(dangers.get(now).obstacle.getMidPoint().x - Game.WIDTH / 2) < Math.abs(dangers.get(cand).obstacle.getMidPoint().x - Game.WIDTH / 2))
@@ -144,7 +144,7 @@ public class GE extends GameObject
                 {
                     continue;
                 }
-                mostDanger.d += Game.genetics[4]/Math.sqrt(Math.abs(data.d));
+                mostDanger.d += handler.dna.node_erase/Math.sqrt(Math.abs(data.d));
                 del.add(data);
             }
         }
@@ -171,7 +171,7 @@ public class GE extends GameObject
                 if (playerMid.x < data.obstacle.getMidPoint().x) leftVal += Math.abs(data.d * w);
                 else rightVal += Math.abs(data.d * w);
             }
-            w = w * Game.genetics[5];
+            w = w * handler.dna.decrease_rate;
         }
         if (leftVal > rightVal)
             KeyInput.PressKey(KeyEvent.VK_LEFT);

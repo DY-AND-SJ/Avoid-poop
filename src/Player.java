@@ -20,8 +20,8 @@ public class Player extends GameObject
     @Override
     public void tick(double frameTime)
     {
-        if (KeyInput.isKeyPressed(KeyEvent.VK_LEFT)) this.x -= Math.min(level * 200, 30) * frameTime / 10000000;
-        if (KeyInput.isKeyPressed(KeyEvent.VK_RIGHT)) this.x += Math.min(level * 200, 30)* frameTime / 10000000;
+        if (KeyInput.isKeyPressed(KeyEvent.VK_LEFT)) this.x -= 30 * frameTime / 10000000;
+        if (KeyInput.isKeyPressed(KeyEvent.VK_RIGHT)) this.x += 30* frameTime / 10000000;
         if (this.x < 0) this.x = 0;
         if (this.x + this.WIDTH > Game.WIDTH) this.x = Game.WIDTH - this.WIDTH;
     }
