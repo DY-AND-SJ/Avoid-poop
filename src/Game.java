@@ -1,6 +1,11 @@
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public final class Game extends Canvas implements Runnable {
     public static final int WIDTH = 600;
@@ -19,34 +24,52 @@ public final class Game extends Canvas implements Runnable {
 
         handler = new Handler(this, dna);
         this.start();
-
     }
 
     public static void testGame(DNA[] dna) {
-        Thread[] threads = new Thread[dna.length];
+        ExecutorService ex = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+        Future<Long>[] futures = new Future[dna.length];
+        //Thread[] threads = new Thread[dna.length];
         for (int i = 0; i < dna.length; ++i) {
             DNA testDNA = dna[i];
-            threads[i] = new Thread(() ->
-            {
-                testDNA.fitness = new Game(testDNA).lastScore;
-            });
-            threads[i].start();
+            futures[i] = ex.submit(() -> new Game(testDNA).lastScore);
         }
-        for (Thread thread : threads) {
+        for (int i = 0; i < dna.length; ++i) {
             try {
-                thread.join();
+                dna[i].fitness = futures[i].get();
             } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
                 e.printStackTrace();
             }
         }
+        ex.shutdown();
     }
 
     public static void main(String[] args) {
         final int totalDNA = 100;
         DNA[] d = new DNA[totalDNA];
-        for (int i = 0; i < totalDNA; ++i) d[i] = new DNA();
-        testGame(d);
-        for (int i = 0; i < totalDNA; ++i) System.out.println(d[i].fitness);
+        for (int Game = 0; Game < 10; ++Game) {
+            for (int i = 0; i < totalDNA; ++i) d[i] = new DNA();
+            testGame(d);
+            for (int i = 0; i < totalDNA; ++i) System.out.println(d[i].fitness);
+
+            ArrayList<DNA> matingPool = new ArrayList<>();
+
+            for (int i = 0; i < d.length; ++i) {
+                int n = (int) d[i].fitness * 100;
+
+                for(int j = 0; j < n; ++j) {
+                    matingPool.add(d[i]);
+                }
+            }
+
+            Random random = new Random();
+            for(int i = 0; i < d.length; ++i) {
+                int a = (int) random.nextDouble() * matingPool.size();
+                int b = (int) random.nextDouble() * matingPool.size();
+            }
+        }
     }
 
     public void start() {
@@ -167,7 +190,7 @@ class DNA {
 
     void mutate(double mutationRate, double target, double b1, double b2) {
         Random r = new Random();
-        if(r.nextDouble() < mutationRate) {
+        if (r.nextDouble() < mutationRate) {
             target = r.nextDouble() * (b2 - b1) + b1;
         }
     }
