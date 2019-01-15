@@ -15,6 +15,7 @@ public final class Game extends Canvas implements Runnable {
     private boolean running = false;
     private Handler handler;
     private Window window;
+    private static final double mutationRate = 0.01;
 
 
     private Game(DNA dna) {
@@ -68,6 +69,20 @@ public final class Game extends Canvas implements Runnable {
             for(int i = 0; i < d.length; ++i) {
                 int a = (int) random.nextDouble() * matingPool.size();
                 int b = (int) random.nextDouble() * matingPool.size();
+
+                while (a == b) {
+                    a = (int) random.nextDouble() * matingPool.size();
+                    b = (int) random.nextDouble() * matingPool.size();
+                }
+
+                DNA parentA = matingPool.get(a);
+                DNA parentB = matingPool.get(b);
+
+                DNA child = parentA.crossover(parentB);
+
+                child.mutate(mutationRate);
+
+                d[i] = child;
             }
         }
     }
@@ -160,7 +175,7 @@ class DNA {
         //fitness = Game.testGame(new double[]{diagonal_dist, velocity, y_coord, resemblance, node_erase, decrease_rate, virtual_spawn_count, virtual_spawn_speed});
     }
 
-    DNA crossover(DNA partner, int length) {
+    DNA crossover(DNA partner) {
         DNA child = new DNA();
 
         child.diagonal_dist = (this.diagonal_dist + partner.diagonal_dist) / 2;
