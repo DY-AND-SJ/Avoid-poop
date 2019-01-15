@@ -192,21 +192,22 @@ class DNA {
     }
 
     void mutate(double mutationRate) {
-        mutate(mutationRate, diagonal_dist, 0.2, 5);
-        mutate(mutationRate, velocity, 0.2, 5);
-        mutate(mutationRate, y_coord, 0.2, 5);
-        mutate(mutationRate, resemblance, 10, 7000);
-        mutate(mutationRate, node_erase, 0, 30000);
-        mutate(mutationRate, decrease_rate, 0, 1);
-        mutate(mutationRate, virtual_spawn_count, 0, 20);
-        mutate(mutationRate, node_erase, 1, 30);
-        mutate(mutationRate, node_erase, 1, 30);
+        diagonal_dist = mutate(mutationRate, diagonal_dist, 0.2, 5);
+        velocity = mutate(mutationRate, velocity, 0.2, 5);
+        y_coord = mutate(mutationRate, y_coord, 0.2, 5);
+        resemblance = mutate(mutationRate, resemblance, 10, 7000);
+        node_erase = mutate(mutationRate, node_erase, 0, 30000);
+        decrease_rate = mutate(mutationRate, decrease_rate, 0, 1);
+        virtual_spawn_count = mutate(mutationRate, virtual_spawn_count, 0, 20);
+        virtual_spawn_speed = mutate(mutationRate, virtual_spawn_speed, 1, 30);
+        player_speed =  mutate(mutationRate, player_speed, 1, 30);
     }
 
-    void mutate(double mutationRate, double target, double b1, double b2) {
+    double mutate(double mutationRate, double target, double b1, double b2) {
         Random r = new Random();
         if (r.nextDouble() < mutationRate) {
-            target = r.nextDouble() * (b2 - b1) + b1;
+            return r.nextDouble() * (b2 - b1) + b1;
         }
+        return target;
     }
 }
