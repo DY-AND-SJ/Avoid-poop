@@ -116,7 +116,7 @@ public class GE extends GameObject
                         {
                             cand = now;
                         }
-                       // break;
+                        // break;
                     } else cand = now;
                 }
                 for (int nxt : M[now])
@@ -144,7 +144,7 @@ public class GE extends GameObject
                 {
                     continue;
                 }
-                mostDanger.d += handler.dna.node_erase/Math.sqrt(Math.abs(data.d));
+                mostDanger.d += handler.dna.node_erase / Math.sqrt(Math.abs(data.d));
                 del.add(data);
             }
         }
@@ -173,10 +173,14 @@ public class GE extends GameObject
             }
             w = w * handler.dna.decrease_rate;
         }
+
         if (leftVal > rightVal)
+        {
             KeyInput.PressKey(KeyEvent.VK_LEFT);
-        else if (rightVal > leftVal)
+        } else if (rightVal > leftVal)
+        {
             KeyInput.PressKey(KeyEvent.VK_RIGHT);
+        }
     }
 
     void moveToward(double nowX, double targetX)
