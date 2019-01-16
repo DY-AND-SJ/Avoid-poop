@@ -29,7 +29,7 @@ public class Spownser extends GameObject
     {
         if (player.isDie()) return;
         long nowTime = System.currentTimeMillis();
-        if (nowTime - lastLevelUpTime >= 5_000)
+        if (nowTime - lastLevelUpTime >= 5000)
         {
             ++level;
             player.level = level;
