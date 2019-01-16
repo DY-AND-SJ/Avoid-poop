@@ -1,7 +1,10 @@
 import java.awt.*;
 import java.awt.image.BufferStrategy;
-import java.util.ArrayList;
-import java.util.Random;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -55,17 +58,29 @@ public final class Game extends Canvas implements Runnable
         ex.shutdown();
     }
 
-    public static void main(String[] args)
+    public static void main(String[] args) throws Exception
     {
         final int totalDNA = 100;
         DNA[] d = new DNA[totalDNA];
-        for (int i = 0; i < totalDNA; ++i) d[i] = new DNA();
+        Scanner scan = new Scanner(new File("DNA.txt"));
+        for (int i = 0; i < totalDNA; ++i)
+        {
+            d[i] = new DNA();
+            d[i].diagonal_dist = scan.nextDouble();
+            d[i].velocity = scan.nextDouble();
+            d[i].y_coord = scan.nextDouble();
+            d[i].resemblance = scan.nextDouble();
+            d[i].node_erase = scan.nextDouble();
+            d[i].decrease_rate = scan.nextDouble();
+            d[i].virtual_spawn_count = scan.nextDouble();
+            d[i].virtual_spawn_speed = scan.nextDouble();
+            d[i].player_speed = scan.nextDouble();
+            d[i].fitness = scan.nextDouble();
+        }
+
+
         for (int Game = 0; Game < 10; ++Game)
         {
-
-            testGame(d);
-            for (int i = 0; i < totalDNA; ++i) System.out.println(d[i].fitness);
-
             ArrayList<DNA> matingPool = new ArrayList<>();
             DNA first = new DNA();
             DNA second = new DNA();
@@ -109,6 +124,23 @@ public final class Game extends Canvas implements Runnable
 
                 d[i] = child;
             }
+
+
+            testGame(d);
+            for (int i = 0; i < totalDNA; ++i) System.out.println(d[i].fitness);
+
+            Arrays.sort(d, Comparator.comparingDouble(i -> i.fitness));
+            PrintWriter pw = new PrintWriter("DNA.txt");
+            for (DNA dna : d)
+            {
+                pw.println(dna.toString());
+            }
+            pw.flush();
+            DataOutputStream dos = new DataOutputStream(new FileOutputStream("data.txt", true));
+            dos.writeDouble(d[d.length - 1].fitness);
+
+
+            System.out.println("MAX : " + d[d.length - 1].fitness);
         }
     }
 
@@ -194,6 +226,10 @@ class DNA
     double player_speed;//1~30
     double fitness;
 
+    public String toString()
+    {
+        return String.format("%f %f %f %f %f %f %f %f %f %f", diagonal_dist, velocity, y_coord, resemblance, node_erase, decrease_rate, virtual_spawn_count, virtual_spawn_speed, player_speed, fitness);
+    }
     DNA()
     {
         Random random = new Random();
