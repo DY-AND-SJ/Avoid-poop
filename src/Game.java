@@ -11,10 +11,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 public final class Game extends Canvas implements Runnable {
-    public static final int WIDTH = 600;
-    public static final int HEIGHT = 800;
+    static final int WIDTH = 600;
+    static final int HEIGHT = 800;
     private static final double mutationRate = 0.01;
-    public long lastScore;
+    private long lastScore;
     private Thread thread;
     private boolean running = false;
     private Handler handler;
@@ -30,7 +30,7 @@ public final class Game extends Canvas implements Runnable {
         this.start();
     }
 
-    public static void testGame(DNA[] dna) {
+    private static void testGame(DNA[] dna) {
         ExecutorService ex = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
         Future<Long>[] futures = new Future[dna.length];
         //Thread[] threads = new Thread[dna.length];
@@ -41,9 +41,7 @@ public final class Game extends Canvas implements Runnable {
         for (int i = 0; i < dna.length; ++i) {
             try {
                 dna[i].fitness = futures[i].get();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
+            } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }
         }
@@ -70,37 +68,27 @@ public final class Game extends Canvas implements Runnable {
 
         for (int Game = 0; Game < 100; ++Game) {
             ArrayList<DNA> matingPool = new ArrayList<>();
-            Arrays.sort(d, Comparator.comparingDouble(i -> i.fitness));
 
-            for (int i = 0; i < d.length; ++i) {
-                int n = (int) d[i].fitness * 100;
+            for (DNA dna1 : d) {
+                int n = (int) dna1.fitness * 100;
 
                 for (int j = 0; j < n; ++j) {
-                    matingPool.add(d[i]);
+                    matingPool.add(dna1);
                 }
             }
 
-            for (int i = d.length - 1; i > d.length / 2; --i) {
-                DNA parentA = d[i];
-                DNA parentB = d[i - 1];
-
-                DNA child = parentA.crossover(parentB);
-
-                child.mutate(mutationRate);
-
-                d[i] = child;
-            }
-
             Random random = new Random();
-            for (int i = d.length / 2; i < d.length; ++i) {
+            for (int i = 0; i < d.length; ++i) {
                 int a = random.nextInt(matingPool.size());
                 int b = random.nextInt(matingPool.size());
+
                 if (a == b) {
                     if (a == 0)
                         b = 1;
                     else
                         b = a - 1;
                 }
+
                 DNA parentA = matingPool.get(a);
                 DNA parentB = matingPool.get(b);
 
@@ -110,7 +98,6 @@ public final class Game extends Canvas implements Runnable {
 
                 d[i] = child;
             }
-
 
             testGame(d);
             for (int i = 0; i < totalDNA; ++i) System.out.println(d[i].fitness);
@@ -128,7 +115,7 @@ public final class Game extends Canvas implements Runnable {
         }
     }
 
-    public void start() {
+    private void start() {
         thread = new Thread(this);
 
         running = true;
@@ -146,7 +133,7 @@ public final class Game extends Canvas implements Runnable {
             }
     }
 
-    public void stop() {
+    void stop() {
         running = false;
         window.frame.dispose();
     }
@@ -209,7 +196,7 @@ class DNA {
         decrease_rate = random.nextDouble();
         virtual_spawn_count = random.nextDouble() * 20;
         virtual_spawn_speed = random.nextDouble() * (30 - 1) + 1;
-        player_speed = random.nextDouble() * 0 + 1;
+        player_speed = random.nextDouble() * 14 + 1;
     }
 
     public String toString() {
@@ -245,10 +232,10 @@ class DNA {
         decrease_rate = mutate(mutationRate, decrease_rate, 0, 1);
         virtual_spawn_count = mutate(mutationRate, virtual_spawn_count, 0, 20);
         virtual_spawn_speed = mutate(mutationRate, virtual_spawn_speed, 1, 30);
-        player_speed = mutate(mutationRate, player_speed, 1, 1);
+        player_speed = mutate(mutationRate, player_speed, 1, 15);
     }
 
-    double mutate(double mutationRate, double target, double b1, double b2) {
+    private double mutate(double mutationRate, double target, double b1, double b2) {
         Random r = new Random();
         if (r.nextDouble() < mutationRate) {
             return r.nextDouble() * (b2 - b1) + b1;

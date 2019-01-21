@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="caeb828b-5863-40d1-9ae5-1a77a341e013" name="Default Changelist" comment="박동연-할일 완료">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="caeb828b-5863-40d1-9ae5-1a77a341e013" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/DNA.txt" beforeDir="false" afterPath="$PROJECT_DIR$/DNA.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
@@ -18,17 +17,7 @@
     <favorites_list name="Avoid-poop" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Game.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="41">
-              <caret line="64" column="57" lean-forward="true" selection-start-line="64" selection-start-column="57" selection-end-line="64" selection-end-column="57" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -51,11 +40,11 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="307" />
-    <option name="y" value="61" />
-    <option name="width" value="1399" />
-    <option name="height" value="949" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="92" />
+    <option name="y" value="67" />
+    <option name="width" value="1400" />
+    <option name="height" value="950" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -140,7 +129,7 @@
       <workItem from="1547981855702" duration="179000" />
       <workItem from="1547982040064" duration="3683000" />
       <workItem from="1547990373557" duration="9989000" />
-      <workItem from="1548049043749" duration="2430000" />
+      <workItem from="1548049043749" duration="6747000" />
     </task>
     <task id="LOCAL-00001" summary="박동연-Mutate함수와 CrossOver함수 구현 완료">
       <created>1547566996039</created>
@@ -163,17 +152,23 @@
       <option name="project" value="LOCAL" />
       <updated>1547568618623</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="test 1 - 반 다 올림">
+      <created>1548051525819</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1548051525819</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22032000" />
+    <option name="totallyTimeSpent" value="26349000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49859154" visible="true" weight="0.14792503" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49859154" visible="true" weight="0.14792503" />
       <window_info id="Structure" order="1" sideWeight="0.50140846" side_tool="true" weight="0.17336011" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -182,7 +177,7 @@
       <window_info id="Favorites" order="6" sideWeight="0.50140846" side_tool="true" weight="0.17336011" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.23466666" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.23466666" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -243,7 +238,8 @@
     <MESSAGE value="박동연-Mutate함수와 CrossOver함수 구현 완료" />
     <MESSAGE value="박동연-게임 구현중" />
     <MESSAGE value="박동연-할일 완료" />
-    <option name="LAST_COMMIT_MESSAGE" value="박동연-할일 완료" />
+    <MESSAGE value="test 1 - 반 다 올림" />
+    <option name="LAST_COMMIT_MESSAGE" value="test 1 - 반 다 올림" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -285,13 +281,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DNA.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1068">
-          <caret line="10" column="52" selection-start-line="10" selection-start-column="52" selection-end-line="10" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/Downloads/jdk-11.0.1/lib/src.zip!/java.base/jdk/internal/util/Preconditions.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
@@ -299,10 +288,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/DNA.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="40" lean-forward="true" selection-start-line="10" selection-start-column="40" selection-end-line="10" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="41">
-          <caret line="64" column="57" lean-forward="true" selection-start-line="64" selection-start-column="57" selection-end-line="64" selection-end-column="57" />
+        <state relative-caret-position="174">
+          <caret line="178" column="6" selection-start-line="178" selection-start-column="6" selection-end-line="178" selection-end-column="6" />
         </state>
       </provider>
     </entry>
